@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 #Importing the Dataset
-dataset = pd.read_csv('/Users/yuryjefse/Documents/Estudo/MachineLearningAtoZ/Part 1 - Data Preprocessing/Data.csv')
+dataset = pd.read_csv('Data.csv')
 
 #Get the Independent variables
 X = dataset.iloc[:, :-1].values
@@ -17,3 +17,15 @@ from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values="NaN")
 imputer = imputer.fit(X[:, 1:])
 X[:,1:] = imputer.transform(X[:,1:])
+
+
+#Encoding categorical values
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+labelencoder_country = LabelEncoder()
+X[:,0] = labelencoder_country.fit_transform(X[:,0])
+labelencoder_purchased = LabelEncoder()
+Y = labelencoder_country.fit_transform(Y)
+
+#Create Dummy variables
+onehotencoder_country = OneHotEncoder(categorical_features = [0])
+X = onehotencoder_country.fit_transform(X).toarray()
