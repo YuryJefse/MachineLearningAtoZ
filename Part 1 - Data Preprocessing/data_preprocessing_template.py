@@ -29,3 +29,5 @@ Y = labelencoder_country.fit_transform(Y)
 #Create Dummy variables
 onehotencoder_country = OneHotEncoder(categorical_features = [0])
 X = onehotencoder_country.fit_transform(X).toarray()
+
+#Splitting the dataset into the Training set and Test set
